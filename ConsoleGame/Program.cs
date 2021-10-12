@@ -1,5 +1,7 @@
 ﻿using System;
 
+// 495 lines!
+
 namespace ConsoleGame
 {
     public class Program
