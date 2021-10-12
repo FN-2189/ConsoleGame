@@ -10,9 +10,10 @@ namespace ConsoleGame
             Console.WriteLine("Type 'help' to see all commands.");
             Globals.debugWorld.Debug();
 
-            for(int i = 0; i < 50; i++) // debug
+            for(int i = 0; i < 25; i++) // debug
             {
                 Globals.player.inventory.AddItem(Items.Wood);
+                Globals.player.inventory.AddItem(Items.Stone);
             }
             while (true)
             {

@@ -69,5 +69,6 @@ namespace ConsoleGame
     public class Items
     {
         public static readonly Item Wood = new Item("Wood");
+        public static readonly Item Stone = new Item("Stone");
     }
 }
