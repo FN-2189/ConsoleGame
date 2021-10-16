@@ -55,6 +55,19 @@ namespace ConsoleGame
             return true;// remove 1 item if stack found
         }
 
+        public int GetTotal(Item item)
+        {
+            List<ItemStack> allOfType = inventory.FindAll(stack => stack.Item == item);
+            int total = 0;
+
+            foreach(ItemStack stack in allOfType)
+            {
+                total += stack.Count;
+            }
+
+            return total;
+        }
+
         public void PrintInventory()
         {
             Console.WriteLine("|Inventory|");
