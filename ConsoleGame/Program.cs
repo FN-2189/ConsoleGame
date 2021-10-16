@@ -25,6 +25,7 @@ namespace ConsoleGame
                 Globals.player.inventory.RemoveItem(Items.Stone);
             }
 
+            Renderer.Draw(Globals.player, Globals.jsonWorld);
 
             while (true)
             {
