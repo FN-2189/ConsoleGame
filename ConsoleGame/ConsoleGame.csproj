@@ -6,4 +6,9 @@
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="cd &quot;$(TargetDir)&quot;&#xD;&#xA;mkdir &quot;res&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)res&quot; &quot;$(TargetDir)res&quot;" />
+  </Target>
+
 </Project>
