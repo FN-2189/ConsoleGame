@@ -12,6 +12,7 @@ namespace ConsoleGame
             Console.WriteLine("Type 'help' to see all commands.");
             Globals.debugWorld.Debug();
 
+            // Testing inventory
             for(int i = 0; i < 25; i++) // debug
             {
                 Globals.player.inventory.AddItem(Items.Wood);
@@ -23,6 +24,8 @@ namespace ConsoleGame
                 Globals.player.inventory.RemoveItem(Items.Wood);
                 Globals.player.inventory.RemoveItem(Items.Stone);
             }
+
+
             while (true)
             {
                 Renderer.Draw(Globals.player, Globals.world);
@@ -63,6 +66,9 @@ namespace ConsoleGame
                         return false;
                     }
                     return Commands.Go(splitCommands[1], Globals.player, Globals.world);
+
+                case "cut":
+                    return Commands.Cut(Globals.world, Globals.player);
 
                 case "inventory":
                     Commands.Inventory(Globals.player);
