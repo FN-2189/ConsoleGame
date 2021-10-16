@@ -4,11 +4,16 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Configurations>Debug;Release</Configurations>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
 
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cd &quot;$(TargetDir)&quot;&#xD;&#xA;mkdir &quot;res&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)res&quot; &quot;$(TargetDir)res&quot;" />
+    <Exec Command="cd &quot;$(TargetDir)&quot;&#xD;&#xA;rmdir &quot;res&quot;&#xD;&#xA;mkdir &quot;res&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)res&quot; &quot;$(TargetDir)res&quot;" />
   </Target>
 
 </Project>
