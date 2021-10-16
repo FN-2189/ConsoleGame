@@ -17,6 +17,12 @@ namespace ConsoleGame
                 Globals.player.inventory.AddItem(Items.Wood);
                 Globals.player.inventory.AddItem(Items.Stone);
             }
+
+            for (int i = 0; i < 26; i++) // debug
+            {
+                Globals.player.inventory.RemoveItem(Items.Wood);
+                Globals.player.inventory.RemoveItem(Items.Stone);
+            }
             while (true)
             {
                 Renderer.Draw(Globals.player, Globals.world);

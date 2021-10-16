@@ -11,26 +11,48 @@ namespace ConsoleGame
 
         public bool AddItem(Item item)
         {
-            foreach (ItemStack i in inventory)
+
+            foreach (ItemStack stack in inventory)
             {
-                if (i.Item == item && i.Count < ItemStack.MaxStackSize)
+                if (stack.Item == item && stack.Count < ItemStack.MaxStackSize)
                 {
-                    i.Count += 1;
+                    stack.Count++;
                     return true; //space free
                 }
             }
 
             if (inventory.Count < MaxInventorySize)
             {
-                ItemStack i = new ItemStack(item);// add new ItemStack
-                i.Count += 1;
-                inventory.Add(i);
+                ItemStack stack = new ItemStack(item);// add new ItemStack
+                stack.Count++;
+                inventory.Add(stack);
                 Console.WriteLine("Added new Stack"); //debug
                 return true; //space free
             }
 
             Console.WriteLine("Inventory full!");
             return false; //inventory full
+        }
+
+        public bool RemoveItem(Item item)
+        {
+            ItemStack lastStack = inventory.FindLast(stack => stack.Item == item);
+
+            if(lastStack == null)
+            {
+                Console.WriteLine("Item not present");
+                return false;// no Item found
+            }
+
+            lastStack.Count--;
+
+            if(lastStack.Count == 0)// if the stack is empty remove it
+            {
+                inventory.Remove(lastStack);
+                Console.WriteLine("removed empty stack"); //debug
+            }
+
+            return true;// remove 1 item if stack found
         }
 
         public void PrintInventory()
@@ -40,7 +62,7 @@ namespace ConsoleGame
 
             foreach (ItemStack i in inventory)
             {
-                Console.WriteLine("-> " + i.Item.Name + ": " + i.Count.ToString());
+                Console.WriteLine($"-> {i.Item.Name}: {i.Count}");
             }
         }
     }
