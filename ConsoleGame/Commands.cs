@@ -6,6 +6,7 @@ namespace ConsoleGame
     {
         private const string helpText = 
             "go [argument]: Go in a direction\n" +
+            "cut: Cuts down the tree on the tile you are on\n" +
             "inventory: Displays your inventory\n" +
             "clear: clears the screen and redraws the map\n" +
             "debug: draws the debug map\n" +
@@ -13,6 +14,7 @@ namespace ConsoleGame
             "help [command]: displays more info (and valid arguments) about the command";
 
         private const string noGo = "Invalid Command! Cannot go there.";
+
         public static bool Go(string arg, Player player, World world)
         {
             switch (arg)
@@ -64,6 +66,28 @@ namespace ConsoleGame
             return true;
         }
 
+        public static bool Cut(World world, Player player)
+        {
+            Tile current = world.GetTile(player.PosX, player.PosY);
+
+            if(current == TileTypes.Tree)
+            {
+                if (player.inventory.AddItem(Items.Wood))
+                {
+                    world.SetTile(player.PosX, player.PosY, TileTypes.Grass);
+                    Console.WriteLine("Cutting tree.");
+                    Console.WriteLine($"You now have {player.inventory.GetTotal(Items.Wood)} Wood");
+                    return true;//cut tree and add item
+                }
+                else return false;
+            }
+            else
+            {
+                Console.WriteLine("Not on a tile with a tree!");
+                return false;
+            }
+        }
+
         public static void Inventory(Player player)
         {
             player.inventory.PrintInventory();
@@ -80,6 +104,9 @@ namespace ConsoleGame
             {
                 case "go":
                     Console.WriteLine("go: up:    go up\n    down:  go down\n    left:  go left\n    right: go right");//formatted
+                    break;
+                case "cut":
+                    Console.WriteLine("cut: Cuts down the tree on the tile you are on. Does not work if your inventory is full.");
                     break;
                 case "inventory":
                     Console.WriteLine("inventory: Displays your current inventory and shows all your items.\nDoes not use up a turn.");
