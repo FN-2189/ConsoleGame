@@ -16,7 +16,7 @@ namespace ConsoleGame
 
             int cX = SizeX / 2;
             int cY = SizeY / 2;
-
+            /*
             for (int y = 0; y < SizeY; y++)//grid
             {
                 for (int x = 0; x < SizeX; x++)//rows
@@ -34,6 +34,7 @@ namespace ConsoleGame
                     
                 }
             }
+            */
         }
 
         public void SetTile(int x, int y, Tile tile)
