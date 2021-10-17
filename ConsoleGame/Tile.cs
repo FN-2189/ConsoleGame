@@ -8,6 +8,8 @@ namespace ConsoleGame
     {
         public static readonly Tile StoneBrick = JsonDeserializer.DeserializeTile("./res/tile/stone.json");
 
+        public static readonly Tile Bridge = JsonDeserializer.DeserializeTile("./res/tile/bridge.json");
+
         public static readonly Tile Water = JsonDeserializer.DeserializeTile("./res/tile/water.json");
 
         public static readonly Tile Grass = JsonDeserializer.DeserializeTile("./res/tile/grass.json");
@@ -18,7 +20,7 @@ namespace ConsoleGame
 
         public static readonly Tile JsonTile = JsonDeserializer.DeserializeTile("./res/tile/jsonTile.json");
 
-        public static readonly Tile[] allTiles = new Tile[] { Grass, Water, Tree, StoneBrick, Test, JsonTile };
+        public static readonly Tile[] allTiles = new Tile[] { Grass, Bridge, Water, Tree, StoneBrick, Test, JsonTile };
         public static readonly List<Tile> nonWalkable = new List<Tile> { Water };
     }
 

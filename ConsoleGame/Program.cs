@@ -50,7 +50,7 @@ namespace ConsoleGame
                 Console.WriteLine(s);
             */
 
-            if (splitCommands.Length > 2 || splitCommands[0] == "")
+            if (splitCommands.Length > 3 || splitCommands[0] == "")
             {
                 Console.WriteLine("Command too long or too short, try again! Type 'help' for a list of commands.");
                 return false;
@@ -59,7 +59,7 @@ namespace ConsoleGame
             switch (splitCommands[0])
             {
                 case "go":
-                    if (splitCommands.Length == 1)
+                    if (splitCommands.Length < 2)
                     {
                         Console.WriteLine("Command invalid: 'go' requires an argument! Type 'help go' to see a list of arguments.");
                         return false;
@@ -68,6 +68,14 @@ namespace ConsoleGame
 
                 case "cut":
                     return Commands.Cut(Globals.world, Globals.player);
+
+                case "build":
+                    if(splitCommands.Length < 3)
+                    {
+                        Console.WriteLine("Command invalid: 'build' requires 2 arguments! Type 'help build' to see a list of arguments.");
+                        return false;
+                    }
+                    return Commands.Build(splitCommands[1], splitCommands[2], Globals.player, Globals.world);
 
                 case "inventory":
                     Commands.Inventory(Globals.player);

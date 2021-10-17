@@ -1,0 +1,12 @@
+{
+    "Name": "Bridge",
+
+    "Characters": [
+        "|  |",
+        "|  |"
+    ],
+
+    "ForeColors": [ 7, 0, 0, 7, 7, 0, 0, 7 ],
+
+    "BackColors": [ 6, 6, 6, 6, 6, 6, 6, 6 ]
+}
