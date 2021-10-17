@@ -13,7 +13,7 @@
 
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cd &quot;$(TargetDir)&quot;&#xD;&#xA;rmdir &quot;res&quot;&#xD;&#xA;mkdir &quot;res&quot;&#xD;&#xA;cd &quot;res&quot;&#xD;&#xA;mkdir &quot;tile&quot;&#xD;&#xA;mkdir &quot;world&quot;&#xD;&#xA;copy &quot;$(ProjectDir)res/tile&quot; &quot;$(TargetDir)res/tile&quot;&#xD;&#xA;copy &quot;$(ProjectDir)res/world&quot; &quot;$(TargetDir)res/world&quot;" />
+    <Exec Command="cd &quot;$(TargetDir)&quot;&#xD;&#xA;mkdir &quot;res&quot;&#xD;&#xA;mkdir &quot;res\tile&quot;&#xD;&#xA;mkdir &quot;res\world&quot;&#xD;&#xA;copy &quot;$(ProjectDir)res\tile&quot; &quot;$(TargetDir)res\tile&quot;&#xD;&#xA;copy &quot;$(ProjectDir)res\world&quot; &quot;$(TargetDir)res\world&quot;" />
   </Target>
 
 </Project>
