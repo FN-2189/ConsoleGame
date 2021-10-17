@@ -4,7 +4,7 @@ using System.IO;
 
 namespace ConsoleGame
 {
-    class JsonDeserializer
+    public class JsonDeserializer
     {
         public static World DeserializeWorld(string path)
         {
