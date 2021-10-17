@@ -12,42 +12,17 @@ namespace ConsoleGame
             { stoneBrickSubTile, stoneBrickSubTile, stoneBrickSubTile, stoneBrickSubTile },
             { stoneBrickSubTile, stoneBrickSubTile, stoneBrickSubTile, stoneBrickSubTile }
         };
-        public static readonly Tile StoneBrick = new Tile("Stone",stoneBrickSubTiles);
+        public static readonly Tile StoneBrick = JsonDeserializer.DeserializeTile("./res/tile/stone.json");
 
-        private static readonly SubTile waterSubTile = new SubTile(ConsoleColor.DarkCyan, ConsoleColor.DarkBlue, '~');//Water
-        private static readonly SubTile[,] waterSubTiles = new SubTile[Tile.Height, Tile.Width]
-        {
-            { waterSubTile, waterSubTile, waterSubTile, waterSubTile },
-            { waterSubTile, waterSubTile, waterSubTile, waterSubTile }
-        };
-        public static readonly Tile Water = new Tile("Water", waterSubTiles);
+        public static readonly Tile Water = JsonDeserializer.DeserializeTile("./res/tile/water.json");
 
-        private static readonly SubTile grassSubTile = new SubTile(ConsoleColor.Green, ConsoleColor.DarkGreen, '#');//Grass
-        private static readonly SubTile[,] grassSubTiles = new SubTile[Tile.Height, Tile.Width]
-        {
-            { grassSubTile, grassSubTile, grassSubTile, grassSubTile },
-            { grassSubTile, grassSubTile, grassSubTile, grassSubTile }
-        };
-        public static readonly Tile Grass = new Tile("Grass", grassSubTiles);
+        public static readonly Tile Grass = JsonDeserializer.DeserializeTile("./res/tile/grass.json");
 
-        public static readonly SubTile stemSubTile = new SubTile(ConsoleColor.DarkRed, ConsoleColor.DarkRed, ' ');
-        public static readonly SubTile leafSubTile = new SubTile(ConsoleColor.DarkGreen, ConsoleColor.Green, 'M');
-        private static readonly SubTile[,] treeSubTiles = new SubTile[Tile.Height, Tile.Width]
-        {
-            { grassSubTile, leafSubTile, leafSubTile, leafSubTile },
-            { grassSubTile, grassSubTile, stemSubTile, grassSubTile }
-        };
-        public static readonly Tile Tree = new Tile("Tree", treeSubTiles);
+        public static readonly Tile Tree = JsonDeserializer.DeserializeTile("./res/tile/tree.json");
 
-        private static readonly SubTile[,] testSubTiles = new SubTile[Tile.Height, Tile.Width]
-        {
-            { new SubTile(ConsoleColor.White, ConsoleColor.Black, 'a'), new SubTile(ConsoleColor.DarkGray, ConsoleColor.Gray, 'b'), new SubTile(ConsoleColor.DarkBlue, ConsoleColor.Blue, 'c'), new SubTile(ConsoleColor.DarkRed, ConsoleColor.Red, 'd') },
-            { new SubTile(ConsoleColor.DarkYellow, ConsoleColor.Yellow, 'e'), new SubTile(ConsoleColor.DarkGreen, ConsoleColor.Green, 'f'), new SubTile(ConsoleColor.DarkCyan, ConsoleColor.Cyan, 'g'), new SubTile(ConsoleColor.DarkMagenta, ConsoleColor.Magenta, 'h') }
+        public static readonly Tile Test = JsonDeserializer.DeserializeTile("./res/tile/test.json");
 
-        };// Test Tile
-        public static readonly Tile Test = new Tile("Test", testSubTiles);
-
-        public static readonly Tile JsonTile = JsonDeserializer.DeserializeTile("./res/jsonTile.json");
+        public static readonly Tile JsonTile = JsonDeserializer.DeserializeTile("./res/tile/jsonTile.json");
 
         public static readonly Tile[] allTiles = new Tile[] { Grass, Water, Tree, StoneBrick, Test, JsonTile };
         public static readonly List<Tile> nonWalkable = new List<Tile> { Water };
