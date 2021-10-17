@@ -20,21 +20,14 @@ namespace ConsoleGame
             {
                 foreach(char c in s)
                 {
-                    switch (c)
+                    tileToSet = c switch
                     {
-                        case '#'://grass
-                            tileToSet = TileTypes.Grass;
-                            break;
-                        case 'T'://tree
-                            tileToSet = TileTypes.Tree;
-                            break;
-                        case '~'://water
-                            tileToSet = TileTypes.Water;
-                            break;
-                        default:
-                            tileToSet = TileTypes.Grass;//set to grass if tile not mached
-                            break;
-                    }
+                        '#' => TileTypes.Grass,
+                        '~' => TileTypes.Water,
+                        'T' => TileTypes.Tree,
+                        _ => TileTypes.Test
+                    };
+                    
                     world.SetTile(x, y, tileToSet);
 
                     x++;
