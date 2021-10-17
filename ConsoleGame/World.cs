@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace ConsoleGame
 {
     public class World
@@ -14,9 +12,9 @@ namespace ConsoleGame
             SizeY = sizeY;
             tiles = new Tile[SizeX, SizeY];
 
+            /*
             int cX = SizeX / 2;
             int cY = SizeY / 2;
-            /*
             for (int y = 0; y < SizeY; y++)//grid
             {
                 for (int x = 0; x < SizeX; x++)//rows
