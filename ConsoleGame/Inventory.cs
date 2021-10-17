@@ -11,14 +11,13 @@ namespace ConsoleGame
 
         public bool AddItem(Item item)
         {
+            ItemStack lastStack = inventory.FindLast(stack => stack.Item == item && stack.Count < ItemStack.MaxStackSize);
 
-            foreach (ItemStack stack in inventory)
+            if(lastStack != null)
             {
-                if (stack.Item == item && stack.Count < ItemStack.MaxStackSize)
-                {
-                    stack.Count++;
-                    return true; //space free
-                }
+                lastStack.Count++;
+                return true; //space free
+
             }
 
             if (inventory.Count < MaxInventorySize)
