@@ -5,7 +5,7 @@ namespace ConsoleGame
 {
     class JsonDeserializer
     {
-        public static World DeserializeWorldJson(string path)
+        public static World DeserializeWorld(string path)
         {
             WorldTiles worldTiles = JsonSerializer.Deserialize<WorldTiles>(File.ReadAllText(path));
             string[] tiles = worldTiles.Tiles;
