@@ -20,7 +20,7 @@ namespace ConsoleGame
 
         public static readonly Tile JsonTile = JsonDeserializer.DeserializeTile("./res/tile/jsonTile.json");
 
-        public static readonly Tile[] allTiles = new Tile[] { Grass, Bridge, Water, Tree, StoneBrick, Test, JsonTile };
+        public static readonly List<Tile> allTiles = new List<Tile>{ Grass, Bridge, Water, Tree, StoneBrick, Test, JsonTile };
         public static readonly List<Tile> nonWalkable = new List<Tile> { Water };
     }
 

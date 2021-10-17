@@ -51,7 +51,7 @@ namespace ConsoleGame
                 for (int x = 0; x < SizeX; x++)//rows
                 {
                     //Debug Pattern: displays all tiles
-                    SetTile(x, y, TileTypes.allTiles[(x + y) % TileTypes.allTiles.Length]);//sick code bro
+                    SetTile(x, y, TileTypes.allTiles[(x + y) % TileTypes.allTiles.Count]);//sick code bro
 
                 }
             }
