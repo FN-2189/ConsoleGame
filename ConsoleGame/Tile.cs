@@ -12,7 +12,7 @@ namespace ConsoleGame
             { stoneBrickSubTile, stoneBrickSubTile, stoneBrickSubTile, stoneBrickSubTile },
             { stoneBrickSubTile, stoneBrickSubTile, stoneBrickSubTile, stoneBrickSubTile }
         };
-        public static readonly Tile StoneBrick = new Tile(stoneBrickSubTiles);
+        public static readonly Tile StoneBrick = new Tile("Stone",stoneBrickSubTiles);
 
         private static readonly SubTile waterSubTile = new SubTile(ConsoleColor.DarkCyan, ConsoleColor.DarkBlue, '~');//Water
         private static readonly SubTile[,] waterSubTiles = new SubTile[Tile.Height, Tile.Width]
@@ -20,7 +20,7 @@ namespace ConsoleGame
             { waterSubTile, waterSubTile, waterSubTile, waterSubTile },
             { waterSubTile, waterSubTile, waterSubTile, waterSubTile }
         };
-        public static readonly Tile Water = new Tile(waterSubTiles);
+        public static readonly Tile Water = new Tile("Water", waterSubTiles);
 
         private static readonly SubTile grassSubTile = new SubTile(ConsoleColor.Green, ConsoleColor.DarkGreen, '#');//Grass
         private static readonly SubTile[,] grassSubTiles = new SubTile[Tile.Height, Tile.Width]
@@ -28,7 +28,7 @@ namespace ConsoleGame
             { grassSubTile, grassSubTile, grassSubTile, grassSubTile },
             { grassSubTile, grassSubTile, grassSubTile, grassSubTile }
         };
-        public static readonly Tile Grass = new Tile(grassSubTiles);
+        public static readonly Tile Grass = new Tile("Grass", grassSubTiles);
 
         public static readonly SubTile stemSubTile = new SubTile(ConsoleColor.DarkRed, ConsoleColor.DarkRed, ' ');
         public static readonly SubTile leafSubTile = new SubTile(ConsoleColor.DarkGreen, ConsoleColor.Green, 'M');
@@ -37,7 +37,7 @@ namespace ConsoleGame
             { grassSubTile, leafSubTile, leafSubTile, leafSubTile },
             { grassSubTile, grassSubTile, stemSubTile, grassSubTile }
         };
-        public static readonly Tile Tree = new Tile(treeSubTiles);
+        public static readonly Tile Tree = new Tile("Tree", treeSubTiles);
 
         private static readonly SubTile[,] testSubTiles = new SubTile[Tile.Height, Tile.Width]
         {
@@ -45,10 +45,11 @@ namespace ConsoleGame
             { new SubTile(ConsoleColor.DarkYellow, ConsoleColor.Yellow, 'e'), new SubTile(ConsoleColor.DarkGreen, ConsoleColor.Green, 'f'), new SubTile(ConsoleColor.DarkCyan, ConsoleColor.Cyan, 'g'), new SubTile(ConsoleColor.DarkMagenta, ConsoleColor.Magenta, 'h') }
 
         };// Test Tile
-        public static readonly Tile Test = new Tile(testSubTiles);
+        public static readonly Tile Test = new Tile("Test", testSubTiles);
 
+        public static readonly Tile JsonTile = JsonDeserializer.DeserializeTile("./res/jsonTile.json");
 
-        public static readonly Tile[] allTiles = new Tile[] { Grass, Water, Tree, StoneBrick, Test };
+        public static readonly Tile[] allTiles = new Tile[] { Grass, Water, Tree, StoneBrick, Test, JsonTile };
         public static readonly List<Tile> nonWalkable = new List<Tile> { Water };
     }
 
@@ -56,19 +57,22 @@ namespace ConsoleGame
     {
         public const int Width = 4, Height = 2;
 
+        public readonly string Name;
+
         public readonly SubTile[,] SubTiles;
 
-        public Tile(SubTile[,] subTiles)
+        public Tile(string name, SubTile[,] subTiles)
         {
+            Name = name;
             SubTiles = subTiles;
         }
     }
 
     public class SubTile
     {
-        public readonly ConsoleColor BackgroundColor;
-        public readonly ConsoleColor ForegroundColor;
-        public readonly char Character;
+        public ConsoleColor BackgroundColor;
+        public ConsoleColor ForegroundColor;
+        public char Character;
 
         public SubTile(ConsoleColor backgroundColor, ConsoleColor foregroundColor, char character)
         {

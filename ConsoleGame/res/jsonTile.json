@@ -1,0 +1,14 @@
+﻿{
+    "Name": "JsonTile",
+
+    "Characters": [
+        "qwer",
+        "asdf"
+    ],
+
+    "ForeColors": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+
+    "BackColors": [ 15, 15, 15, 15, 15, 15, 15, 15 ]
+
+}
+
