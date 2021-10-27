@@ -24,7 +24,7 @@ namespace ConsoleGame
                     SubTile current = null;
                     if (x == player.PosX * Tile.Width + (int)(Tile.Width / 2) - 1 && y == player.PosY * Tile.Height + Tile.Height - 1)
                         current = player.SubTile;
-                    else if(world.Chests[x / Tile.Width, y / Tile.Height] != null)
+                    else if(world.Chests[y / Tile.Height, x / Tile.Width] != null)
                     {
                         SubTile chestSubTile = world.Chests[y / Tile.Height, x / Tile.Width].Tile.SubTiles[y % Tile.Height, x % Tile.Width];
                         if (chestSubTile.Character != ' ')
@@ -38,6 +38,7 @@ namespace ConsoleGame
                     Console.BackgroundColor = current.BackgroundColor;
                     Console.ForegroundColor = current.ForegroundColor;
                     Console.Write(current.Character);
+
                 }
 
                 Console.BackgroundColor = ConsoleColor.Black;

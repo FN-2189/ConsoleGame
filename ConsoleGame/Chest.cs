@@ -9,7 +9,7 @@ namespace ConsoleGame
         public Chest(int size, Tile tile)
         {
             Tile = tile;
-            content = new Inventory(size);
+            content = new Inventory(size, "|Chest|");
         }
 
     }

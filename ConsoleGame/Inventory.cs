@@ -7,10 +7,13 @@ namespace ConsoleGame
     {
         public int MaxInventorySize;
 
+        public string Name;
+
         private readonly List<ItemStack> inventory = new List<ItemStack>();
 
-        public Inventory(int size)
+        public Inventory(int size, string inventoryTitle)
         {
+            Name = inventoryTitle;
             MaxInventorySize = size;
         }
 
@@ -74,7 +77,7 @@ namespace ConsoleGame
 
         public void PrintInventory()
         {
-            Console.WriteLine("|Inventory|");
+            Console.WriteLine(Name);
             Console.WriteLine();
 
             foreach (ItemStack i in inventory)
@@ -107,7 +110,8 @@ namespace ConsoleGame
 
     public class Items
     {
-        public static readonly Item Wood = new Item("Wood");
-        public static readonly Item Stone = new Item("Stone");
+        public static readonly Item Wood = new Item("wood");
+        public static readonly Item Stone = new Item("stone");
+        public static readonly List<Item> AllItems = new List<Item> { Wood, Stone };
     }
 }

@@ -11,6 +11,8 @@ namespace ConsoleGame
             "cut: Cut down the tree on the tile you are on\n" +
             "build [build] [direction]: Build something in a specified direction\n" +
             "inventory: Displays your inventory\n" +
+            "put [item] [amount]: Put an amount of items from your inventory into a chest\n" +
+            "take [item] [amount]: Take an amount of items from a chest\n" +
             "clear: clears the screen and redraws the map\n" +
             "debug: draws the debug map\n" +
             "help: displays a list of all commands\n" +
@@ -129,9 +131,105 @@ namespace ConsoleGame
             }
         }
 
-        public static void Inventory(Player player)
+        public static void Inventory(World world, Player player)
         {
             player.inventory.PrintInventory();
+            if(world.Chests[player.PosY, player.PosX] != null)
+            {
+                world.Chests[player.PosY, player.PosX].content.PrintInventory();
+            }
+        }
+
+        public static void Put(string itemName, string countStr, World world, Player player)
+        {
+            Item item = Items.AllItems.Find(item => item.Name == itemName);
+            int count;
+
+            if(item == null)
+            {
+                Console.WriteLine("Invalid item name!");
+                return;
+            }
+
+            try
+            {
+                count = Convert.ToInt32(countStr);
+            }
+            catch
+            {
+                Console.WriteLine("Amount is not a number");
+                return;
+            }
+
+            if (count < 0) count = 0;
+
+            if (world.Chests[player.PosY, player.PosX] == null) return; //not on chest
+
+            if(player.inventory.GetTotal(item) < count)
+            {
+                Console.WriteLine("You don't have enough items!");
+                return;
+            }
+
+            for(int i = 0; i < count; i++)
+            {
+                player.inventory.RemoveItem(item);
+                if(!world.Chests[player.PosY, player.PosX].content.AddItem(item))
+                {
+                    Console.WriteLine("Not enough space in chest!");
+                    for (int j = i; j > 0; j--) player.inventory.AddItem(item);
+                    return;
+                }
+            }
+
+            Commands.Inventory(world, player);
+            return;
+        }
+
+        public static void Take(string itemName, string countStr, World world, Player player)
+        {
+            Item item = Items.AllItems.Find(item => item.Name == itemName);
+            int count;
+
+            if (item == null)
+            {
+                Console.WriteLine("Invalid item name!");
+                return;
+            }
+
+            try
+            {
+                count = Convert.ToInt32(countStr);
+            }
+            catch
+            {
+                Console.WriteLine("Amount is not a number");
+                return;
+            }
+
+            if (count < 0) count = 0;
+
+            if (world.Chests[player.PosY, player.PosX] == null) return; //not on chest
+
+            if (world.Chests[player.PosY, player.PosX].content.GetTotal(item) < count)
+            {
+                Console.WriteLine("Not enough items in chest!");
+                return;
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                player.inventory.AddItem(item);
+                if (!world.Chests[player.PosY, player.PosX].content.RemoveItem(item))
+                {
+                    Console.WriteLine("Not enough space in inventory!");
+                    for (int j = i; j > 0; j--) player.inventory.RemoveItem(item);
+                    return;
+                }
+            }
+
+            Commands.Inventory(world, player);
+            return;
         }
 
         public static void Help()
@@ -154,6 +252,12 @@ namespace ConsoleGame
                     break;
                 case "inventory":
                     Console.WriteLine("inventory: Displays your current inventory and shows all your items.\nDoes not use up a turn.");
+                    break;
+                case "put":
+                    Console.WriteLine("put [item] [amount]: Put items into a chest. The command will only work if:\n-you are standing on a chest\n-there are enough items in your inventory\n-you have enough space in the chest");
+                    break;
+                case "take":
+                    Console.WriteLine("take [item] [amount]: Take items from a chest. The command will only work if:\n-you are standing on a chest\n-there are enough items in the chest\n-you have enough space in your inventory");
                     break;
                 case "clear":
                     Console.WriteLine("clear: Clears the screen and redraws the map.\nDoes not use up a turn.");

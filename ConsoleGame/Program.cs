@@ -11,7 +11,7 @@ namespace ConsoleGame
         {
             Console.WriteLine("Type 'help' to see all commands.");
             Globals.debugWorld.Debug();
-            Globals.world.Chests[1, 1] = ChestTypes.SmallChest;
+            Globals.world.Chests[0, 1] = ChestTypes.SmallChest;
 
             // Testing inventory
             for(int i = 0; i < 25; i++) // debug
@@ -19,13 +19,13 @@ namespace ConsoleGame
                 Globals.player.inventory.AddItem(Items.Wood);
                 Globals.player.inventory.AddItem(Items.Stone);
             }
-
+            
             for (int i = 0; i < 26; i++) // debug
             {
                 Globals.player.inventory.RemoveItem(Items.Wood);
                 Globals.player.inventory.RemoveItem(Items.Stone);
             }
-
+            
             while (true)
             {
                 Renderer.Draw(Globals.player, Globals.world);
@@ -79,8 +79,26 @@ namespace ConsoleGame
                     return Commands.Build(splitCommands[1], splitCommands[2], Globals.player, Globals.world);
 
                 case "inventory":
-                    Commands.Inventory(Globals.player);
+                    Commands.Inventory(Globals.world, Globals.player);
                     return false;// don't advance
+
+                case "put":
+                    if(splitCommands.Length < 3)
+                    {
+                        Console.WriteLine("Command invalid: 'put' requires 2 arguments! Type 'help put' to see a list of arguments.");
+                        return false;
+                    }
+                    Commands.Put(splitCommands[1], splitCommands[2], Globals.world, Globals.player);
+                    return false;
+
+                case "take":
+                    if (splitCommands.Length < 3)
+                    {
+                        Console.WriteLine("Command invalid: 'take' requires 2 arguments! Type 'help take' to see a list of arguments.");
+                        return false;
+                    }
+                    Commands.Take(splitCommands[1], splitCommands[2], Globals.world, Globals.player);
+                    return false;
 
                 case "clear":
                     Commands.Clear();
