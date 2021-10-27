@@ -21,9 +21,17 @@ namespace ConsoleGame
 
                 for (int x = 0; x < sizeX * Tile.Width; x++)//vertical lines
                 {
-                    SubTile current;
+                    SubTile current = null;
                     if (x == player.PosX * Tile.Width + (int)(Tile.Width / 2) - 1 && y == player.PosY * Tile.Height + Tile.Height - 1)
                         current = player.SubTile;
+                    else if(world.Chests[x / Tile.Width, y / Tile.Height] != null)
+                    {
+                        SubTile chestSubTile = world.Chests[y / Tile.Height, x / Tile.Width].Tile.SubTiles[y % Tile.Height, x % Tile.Width];
+                        if (chestSubTile.Character != ' ')
+                            current = chestSubTile;
+                        else
+                            current = world.GetTile(x / Tile.Width, y / Tile.Height).SubTiles[y % Tile.Height, x % Tile.Width];//getting tile to draw
+                    }
                     else
                         current = world.GetTile(x / Tile.Width, y / Tile.Height).SubTiles[y % Tile.Height, x % Tile.Width];//getting tile to draw
 

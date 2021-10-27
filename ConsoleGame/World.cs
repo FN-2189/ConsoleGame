@@ -3,26 +3,28 @@ namespace ConsoleGame
 {
     public class World
     {
-        public Tile[,] tiles;
+        public Tile[,] Tiles;
+        public Chest[,] Chests;
         public readonly int SizeX, SizeY;
 
         public World(int sizeX, int sizeY)
         {
             SizeX = sizeX;
             SizeY = sizeY;
-            tiles = new Tile[SizeX, SizeY];
+            Tiles = new Tile[SizeX, SizeY];
+            Chests = new Chest[SizeX, SizeY];
 
         }
 
         public void SetTile(int x, int y, Tile tile)
         {
             if (x < 0 || x > SizeX - 1 || y < 0 || y > SizeY - 1) return; //out of bounds
-            tiles[x, y] = tile;
+            Tiles[x, y] = tile;
         }
         public Tile GetTile(int x, int y)
         {
             if (x < 0 || x > SizeX - 1 || y < 0 || y > SizeY - 1) return null; //out of bounds
-            return tiles[x, y];
+            return Tiles[x, y];
         }
 
         public void Debug()

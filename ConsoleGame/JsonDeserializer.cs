@@ -41,7 +41,15 @@ namespace ConsoleGame
 
         public static Tile DeserializeTile(string path)
         {
-            TileJson tileJson = JsonSerializer.Deserialize<TileJson>(File.ReadAllText(path));
+            TileJson tileJson = null;
+            try
+            {
+                tileJson = JsonSerializer.Deserialize<TileJson>(File.ReadAllText(path));
+            }
+            catch(Exception e)
+            {
+                Globals.PrintError($"Error: Could not deserialize {path}");
+            }
 
             int width = tileJson.ForeColors.Length / tileJson.Characters.Length;
             int height = tileJson.Characters.Length;
@@ -97,6 +105,7 @@ namespace ConsoleGame
 
             return new Tile(tileJson.Name, outSubTiles);
         }
+
     }
 
     class WorldJson

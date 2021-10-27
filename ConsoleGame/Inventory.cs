@@ -5,9 +5,14 @@ namespace ConsoleGame
 {
     public class Inventory
     {
-        public const int MaxInventorySize = 10;
+        public int MaxInventorySize;
 
         private readonly List<ItemStack> inventory = new List<ItemStack>();
+
+        public Inventory(int size)
+        {
+            MaxInventorySize = size;
+        }
 
         public bool AddItem(Item item)
         {

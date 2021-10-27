@@ -11,6 +11,7 @@ namespace ConsoleGame
         {
             Console.WriteLine("Type 'help' to see all commands.");
             Globals.debugWorld.Debug();
+            Globals.world.Chests[1, 1] = ChestTypes.SmallChest;
 
             // Testing inventory
             for(int i = 0; i < 25; i++) // debug

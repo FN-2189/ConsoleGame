@@ -1,0 +1,12 @@
+﻿{
+    "Name": "Small Chest",
+
+    "Characters": [
+        "    ",
+        "  T "
+    ],
+
+    "ForeColors": [ 0, 0, 0, 0, 0, 0, 7, 0 ],
+
+    "BackColors": [ 0, 0, 0, 0, 0, 0, 3, 0 ]
+}

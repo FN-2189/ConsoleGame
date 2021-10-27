@@ -15,7 +15,7 @@ namespace ConsoleGame
             PosX = x;
             PosY = y;
             SubTile = subTile;
-            inventory = new Inventory();
+            inventory = new Inventory(10);
             
         }
     }
