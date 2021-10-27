@@ -23,7 +23,7 @@ namespace ConsoleGame
             switch (arg)
             {
                 case "up":
-                    if(player.PosY - 1 < 0 || TileTypes.nonWalkable.Contains(world.GetTile(player.PosX, player.PosY - 1)))
+                    if(TileTypes.nonWalkable.Contains(world.GetTile(player.PosX, player.PosY - 1)))
                     {
                         Console.WriteLine(noGo);
                         return false;// don't go up
@@ -33,7 +33,7 @@ namespace ConsoleGame
                     break;
 
                 case "down":
-                    if (player.PosY + 1 > world.SizeY - 1 || TileTypes.nonWalkable.Contains(world.GetTile(player.PosX, player.PosY + 1)))//wtf
+                    if (TileTypes.nonWalkable.Contains(world.GetTile(player.PosX, player.PosY + 1)))//wtf
                     {
                         Console.WriteLine(noGo);
                         return false;// don't go down
@@ -43,7 +43,7 @@ namespace ConsoleGame
                     break;
 
                 case "left":
-                    if (player.PosX - 1 < 0 || TileTypes.nonWalkable.Contains(world.GetTile(player.PosX - 1, player.PosY)))
+                    if (TileTypes.nonWalkable.Contains(world.GetTile(player.PosX - 1, player.PosY)))
                     {
                         Console.WriteLine(noGo);
                         return false;// don't go left
@@ -53,7 +53,7 @@ namespace ConsoleGame
                     break;
 
                 case "right":
-                    if (player.PosX + 1 > world.SizeX - 1 || TileTypes.nonWalkable.Contains(world.GetTile(player.PosX + 1, player.PosY)))
+                    if (TileTypes.nonWalkable.Contains(world.GetTile(player.PosX + 1, player.PosY)))
                     {
                         Console.WriteLine(noGo);
                         return false;// don't go right
@@ -186,10 +186,10 @@ namespace ConsoleGame
         {
             switch (direction)
             {
-                case Directions.Up: return free.Contains(world.GetTile(player.PosX, player.PosY - 1));
-                case Directions.Down: return free.Contains(world.GetTile(player.PosX, player.PosY + 1));
-                case Directions.Left: return free.Contains(world.GetTile(player.PosX - 1, player.PosY));
-                case Directions.Right: return free.Contains(world.GetTile(player.PosX + 1, player.PosY));
+                case Directions.Up:     return free.Contains(world.GetTile(player.PosX, player.PosY - 1));
+                case Directions.Down:   return free.Contains(world.GetTile(player.PosX, player.PosY + 1));
+                case Directions.Left:   return free.Contains(world.GetTile(player.PosX - 1, player.PosY));
+                case Directions.Right:  return free.Contains(world.GetTile(player.PosX + 1, player.PosY));
             }
 
             return true; //make compiler happy
