@@ -13,19 +13,9 @@ namespace ConsoleGame
             Globals.debugWorld.Debug();
             Globals.world.Chests[0, 1] = ChestTypes.SmallChest;
 
-            // Testing inventory
-            for(int i = 0; i < 25; i++) // debug
-            {
-                Globals.player.inventory.AddItem(Items.Wood);
-                Globals.player.inventory.AddItem(Items.Stone);
-            }
-            
-            for (int i = 0; i < 26; i++) // debug
-            {
-                Globals.player.inventory.RemoveItem(Items.Wood);
-                Globals.player.inventory.RemoveItem(Items.Stone);
-            }
-            
+            Globals.player.inventory.AddItem(Items.Chest);
+            Globals.player.inventory.AddItem(Items.Chest);
+
             while (true)
             {
                 Renderer.Draw(Globals.player, Globals.world);
@@ -76,7 +66,16 @@ namespace ConsoleGame
                         Console.WriteLine("Command invalid: 'build' requires 2 arguments! Type 'help build' to see a list of arguments.");
                         return false;
                     }
+
                     return Commands.Build(splitCommands[1], splitCommands[2], Globals.player, Globals.world);
+
+                case "place":
+                    if(splitCommands.Length < 2)
+                    {
+                        Console.WriteLine("Command invalid: 'place' requires an argument! Type 'help place' to see a list of arguments.");
+                        return false;
+                    }
+                    return Commands.Place(splitCommands[1], Globals.player, Globals.world);
 
                 case "inventory":
                     Commands.Inventory(Globals.world, Globals.player);

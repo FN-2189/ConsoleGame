@@ -46,7 +46,7 @@ namespace ConsoleGame
             {
                 tileJson = JsonSerializer.Deserialize<TileJson>(File.ReadAllText(path));
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 Globals.PrintError($"Error: Could not deserialize {path}");
             }

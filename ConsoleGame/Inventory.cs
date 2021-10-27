@@ -112,6 +112,8 @@ namespace ConsoleGame
     {
         public static readonly Item Wood = new Item("wood");
         public static readonly Item Stone = new Item("stone");
-        public static readonly List<Item> AllItems = new List<Item> { Wood, Stone };
+        public static readonly Item Chest = new Item("chest");
+        public static readonly List<Item> AllItems = new List<Item> { Wood, Stone, Chest };
+        public static readonly List<Item> Placable = new List<Item> { Chest };
     }
 }

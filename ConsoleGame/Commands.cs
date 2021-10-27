@@ -10,6 +10,7 @@ namespace ConsoleGame
             "go [direction]: Go in a direction\n" +
             "cut: Cut down the tree on the tile you are on\n" +
             "build [build] [direction]: Build something in a specified direction\n" +
+            "place [chest]: Place a type of chest\n" +
             "inventory: Displays your inventory\n" +
             "put [item] [amount]: Put an amount of items from your inventory into a chest\n" +
             "take [item] [amount]: Take an amount of items from a chest\n" +
@@ -107,6 +108,33 @@ namespace ConsoleGame
                     Console.WriteLine("Invalid build!");
                     return false;
             }
+        }
+
+        public static bool Place(string itemName, Player player, World world)
+        {
+            Item item = Items.AllItems.Find(item => item.Name == itemName);
+
+            if (!Items.Placable.Contains(item))
+            {
+                Console.WriteLine("This item is not a placable!");
+                return false;
+            }
+
+            if(world.Chests[player.PosY, player.PosX] != null)
+            {
+                Console.WriteLine("Tile occupied!");
+                return false;
+            }
+
+            if(!player.inventory.RemoveItem(item))
+            {
+                Console.WriteLine("You don't have that item!");
+                return false;
+            }
+
+            world.Chests[player.PosY, player.PosX] = ChestTypes.AllChests.Find(chest => chest.Name == item.Name);
+
+            return true;
         }
 
         public static bool Cut(World world, Player player)
@@ -249,6 +277,9 @@ namespace ConsoleGame
                     break;
                 case "build":
                     Console.WriteLine("build [build] [direction]:\n  [build]:\n   bridge: a bridge that can be used to cross water. Can only be placed on water.\n  [direction]:\n   up, down, left, right: specifies the direction in which the build should be built.");
+                    break;
+                case "place":
+                    Console.WriteLine("place [chest]:\n [chest]:\n  chest: a chest that holds up to 8 itemstacks");
                     break;
                 case "inventory":
                     Console.WriteLine("inventory: Displays your current inventory and shows all your items.\nDoes not use up a turn.");
