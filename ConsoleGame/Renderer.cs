@@ -21,12 +21,14 @@ namespace ConsoleGame
 
                 for (int x = 0; x < sizeX * Tile.Width; x++)//vertical lines
                 {
+                    Chest chest = world.Chests.Find(c => c.PosX == x/Tile.Width && c.PosY == y/Tile.Height);
+
                     SubTile current = null;
                     if (x == player.PosX * Tile.Width + (int)(Tile.Width / 2) - 1 && y == player.PosY * Tile.Height + Tile.Height - 1)
                         current = player.SubTile;
-                    else if(world.Chests[y / Tile.Height, x / Tile.Width] != null)
+                    else if(chest != null)
                     {
-                        SubTile chestSubTile = world.Chests[y / Tile.Height, x / Tile.Width].Tile.SubTiles[y % Tile.Height, x % Tile.Width];
+                        SubTile chestSubTile = chest.Tile.SubTiles[y % Tile.Height, x % Tile.Width];
                         if (chestSubTile.Character != ' ')
                             current = chestSubTile;
                         else

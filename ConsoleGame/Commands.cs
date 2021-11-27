@@ -120,7 +120,7 @@ namespace ConsoleGame
                 return false;
             }
 
-            if(world.Chests[player.PosY, player.PosX] != null)
+            if(world.Chests.Find(c => c.PosX == player.PosX && c.PosY == player.PosY) != null)
             {
                 Console.WriteLine("Tile occupied!");
                 return false;
@@ -132,8 +132,26 @@ namespace ConsoleGame
                 return false;
             }
 
-            world.Chests[player.PosY, player.PosX] = ChestTypes.AllChests.Find(chest => chest.Name == item.Name);
+            world.AddChest(ChestTypes.AllChests.Find(chest => chest.Name == item.Name), player.PosX, player.PosY);
 
+            return true;
+        }
+
+        public static bool Break(Player player, World world)
+        {
+            Chest target = world.Chests.Find(c => c.PosX == player.PosX && c.PosY == player.PosY);
+            if(target == null)
+            {
+                Console.WriteLine("No chest on this tile!");
+                return false;
+            }
+            //TODO don't delete items in chest
+            if (!player.inventory.AddItem(Items.AllItems.Find(i => i.Name == target.Name)))
+            {
+                Console.WriteLine("No");
+                return false;
+            }
+            world.Chests.Remove(target);
             return true;
         }
 
@@ -162,9 +180,9 @@ namespace ConsoleGame
         public static void Inventory(World world, Player player)
         {
             player.inventory.PrintInventory();
-            if(world.Chests[player.PosY, player.PosX] != null)
+            if(world.Chests.Find(c => c.PosX == player.PosX && c.PosY == player.PosY) != null)
             {
-                world.Chests[player.PosY, player.PosX].content.PrintInventory();
+                world.Chests.Find(c => c.PosX == player.PosX && c.PosY == player.PosY).content.PrintInventory();
             }
         }
 
@@ -191,7 +209,7 @@ namespace ConsoleGame
 
             if (count < 0) count = 0;
 
-            if (world.Chests[player.PosY, player.PosX] == null) return; //not on chest
+            if (world.Chests.Find(c => c.PosX == player.PosX && c.PosY == player.PosY) == null) return; //not on chest
 
             if(player.inventory.GetTotal(item) < count)
             {
@@ -202,7 +220,7 @@ namespace ConsoleGame
             for(int i = 0; i < count; i++)
             {
                 player.inventory.RemoveItem(item);
-                if(!world.Chests[player.PosY, player.PosX].content.AddItem(item))
+                if(!world.Chests.Find(c => c.PosX == player.PosX && c.PosY == player.PosY).content.AddItem(item))
                 {
                     Console.WriteLine("Not enough space in chest!");
                     for (int j = i; j > 0; j--) player.inventory.AddItem(item);
@@ -237,9 +255,9 @@ namespace ConsoleGame
 
             if (count < 0) count = 0;
 
-            if (world.Chests[player.PosY, player.PosX] == null) return; //not on chest
+            if (world.Chests.Find(c => c.PosX == player.PosX && c.PosY == player.PosY) == null) return; //not on chest
 
-            if (world.Chests[player.PosY, player.PosX].content.GetTotal(item) < count)
+            if (world.Chests.Find(c => c.PosX == player.PosX && c.PosY == player.PosY).content.GetTotal(item) < count)
             {
                 Console.WriteLine("Not enough items in chest!");
                 return;
@@ -248,7 +266,7 @@ namespace ConsoleGame
             for (int i = 0; i < count; i++)
             {
                 player.inventory.AddItem(item);
-                if (!world.Chests[player.PosY, player.PosX].content.RemoveItem(item))
+                if (!world.Chests.Find(c => c.PosX == player.PosX && c.PosY == player.PosY).content.RemoveItem(item))
                 {
                     Console.WriteLine("Not enough space in inventory!");
                     for (int j = i; j > 0; j--) player.inventory.RemoveItem(item);

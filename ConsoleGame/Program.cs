@@ -11,7 +11,7 @@ namespace ConsoleGame
         {
             Console.WriteLine("Type 'help' to see all commands.");
             Globals.debugWorld.Debug();
-            Globals.world.Chests[0, 1] = ChestTypes.SmallChest;
+            Globals.world.AddChest(ChestTypes.SmallChest, 0, 1);
 
             Globals.player.inventory.AddItem(Items.Chest);
             Globals.player.inventory.AddItem(Items.Chest);
@@ -76,6 +76,9 @@ namespace ConsoleGame
                         return false;
                     }
                     return Commands.Place(splitCommands[1], Globals.player, Globals.world);
+
+                case "break":
+                    return Commands.Break(Globals.player, Globals.world);
 
                 case "inventory":
                     Commands.Inventory(Globals.world, Globals.player);
