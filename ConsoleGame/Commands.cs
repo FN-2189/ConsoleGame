@@ -335,7 +335,7 @@ namespace ConsoleGame
         }
 
 
-        static bool IsFree(Directions direction, List<Tile> free, World world, Player player) 
+        private static bool IsFree(Directions direction, List<Tile> free, World world, Player player) 
         {
             switch (direction)
             {
@@ -348,7 +348,7 @@ namespace ConsoleGame
             return true; //make compiler happy
         }
 
-        static void ReplaceTile(Directions direction, Tile tile, World world, Player player)
+        private static void ReplaceTile(Directions direction, Tile tile, World world, Player player)
         {
             switch(direction)
             {
